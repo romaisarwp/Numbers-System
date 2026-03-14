@@ -223,7 +223,26 @@ void Numbers::Decimal_BCD()
 	{
 		for (int j = 0; j < decimal[i].length(); j++)
 		{
-			bcd += decimal[i][j];
+			if (decimal[i][j] == '0')
+				bcd += "0000 ";
+			else if (decimal[i][j] == '1')
+				bcd += "0001 ";
+			else if (decimal[i][j] == '2')
+				bcd += "0010 ";
+			else if (decimal[i][j] == '3')
+				bcd += "0011 ";
+			else if (decimal[i][j] == '4')
+				bcd += "0100 ";
+			else if (decimal[i][j] == '5')
+				bcd += "0101 ";
+			else if (decimal[i][j] == '6')
+				bcd += "0110 ";
+			else if (decimal[i][j] == '7')
+				bcd += "0111 ";
+			else if (decimal[i][j] == '8')
+				bcd += "1000 ";
+			else if (decimal[i][j] == '9')
+				bcd += "1001 ";
 		}
 	}
 
