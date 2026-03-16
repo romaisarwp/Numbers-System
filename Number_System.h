@@ -2,6 +2,7 @@
 #ifndef NUMBER_SYSTEM_H
 #define NUMBER_SYSTEM_H
 
+string reverse(string str);
 class Numbers
 {
 private:
