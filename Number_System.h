@@ -1,6 +1,8 @@
 #pragma once
 #ifndef NUMBER_SYSTEM_H
 #define NUMBER_SYSTEM_H
+#include <string>
+#include <vector>
 
 class Numbers
 {
@@ -20,11 +22,12 @@ public:
 
 	void Decimal_Decimal();
 	void Decimal_Binary();
-	void Decimal_Octal();
+	int Decimal_Octal(int decimal);
 	void Decimal_HexaDecimal();
 	void Decimal_BCD();
 
-	void Binary_Decimal();
+	int Binary_Decimal();
+	void Binary_Octal();
 };
 
 #endif

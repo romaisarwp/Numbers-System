@@ -89,7 +89,12 @@ void Numbers::Navigations2()
 		}
 		else if (input2 == 2)
 		{
-			Decimal_Octal();
+			int decimal;
+			cout << "Enter Decimal Number: ";
+			cin >> decimal;
+			int octal = Decimal_Octal(decimal);
+			cout << "Octal = " << octal << endl;
+			
 		}
 		else if (input2 == 3)
 		{
@@ -111,11 +116,12 @@ void Numbers::Navigations2()
 	case 4:
 		if (input2 == 1)
 		{
-			Binary_Decimal();
+			int decimal = Binary_Decimal();
+			cout << "Decimal = " << decimal << endl;
 		}
 		else if (input2 == 2)
 		{
-			Decimal_Octal();
+			Binary_Octal();
 		}
 		else if (input2 == 3)
 		{
@@ -171,12 +177,10 @@ void Numbers::Decimal_Binary()
 	cout << "Binary =" << binary << endl;
 }
 
-void Numbers::Decimal_Octal()
+int Numbers::Decimal_Octal(int decimal)
 {
-	int decimal;
+
 	string octal = " ";
-	cout << "Enter Decimal Number: ";
-	cin >> decimal;
 	while (decimal >= 1)
 	{
 		int rem;
@@ -185,7 +189,8 @@ void Numbers::Decimal_Octal()
 		string r = to_string(rem);
 		octal += r;
 	}
-	cout << "Octal =" << octal << endl;
+	int octalNum = stoi(octal);
+	return octalNum;
 }
 
 void Numbers::Decimal_HexaDecimal()
@@ -271,26 +276,15 @@ void Numbers::Decimal_BCD()
 	cout << "BCD =" << bcd << endl;
 }
 
-int stringToInt(string s)
-{
-	int num = 0;
-
-	for (int i = 0; i < s.length(); i++)
-	{
-		num = num * 10 + (s[i] - '0');
-	}
-
-	return num;
-}
-
-void Numbers::Binary_Decimal()
+int Numbers::Binary_Decimal()
 {
 	vector<string> binary;
-	int decimal = 0;
 	string temp;
 	cout << "Enter Binary Number: ";
 	cin >> temp;
 	binary.push_back(temp);
+	int decimal = 0;
+
 	for (int i = 0; i < binary.size(); i++)
 	{
 		int expo = binary[i].length() - 1;
@@ -305,5 +299,12 @@ void Numbers::Binary_Decimal()
 			expo--;
 		}
 	}
-	cout << "Decimal = " << decimal << endl;
+	return decimal;
+}
+
+void Numbers::Binary_Octal()
+{
+	int decimal = Binary_Decimal();
+	int octal = Decimal_Octal(decimal);
+	cout << "Octal = " << octal << endl;
 }
