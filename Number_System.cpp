@@ -197,7 +197,7 @@ void Numbers::Decimal_Decimal()
 	int decimal;
 	cout << "Enter Decimal Number: ";
 	cin >> decimal;
-	cout << "Binary = " << decimal << endl; // ???? why binary
+	cout << "Decimal = " << decimal << endl;
 }
 
 void Numbers::Decimal_Binary()
@@ -327,26 +327,21 @@ void Numbers::Binary_Binary()
 
 int Numbers::Binary_Decimal()
 {
-	vector<string> binary;
-	string temp;
+	string binary;
 	cout << "Enter Binary Number: ";
-	cin >> temp;
-	binary.push_back(temp);
+	cin >> binary;
 	int decimal = 0;
 
-	for (int i = 0; i < binary.size(); i++)
-	{
-		int expo = binary[i].length() - 1;
+	int expo = binary.length() - 1;
 
-		for (int j = 0; j < binary[i].length(); j++)
+	for (int i = 0; i < binary.length(); i++)
+	{
+		int num = binary[i] - '0';
+		if (num == 1)
 		{
-			int num = binary[i][j] - '0';
-			if (num == 1)
-			{
-				decimal += (pow(2, expo)) * num;
-			}
-			expo--;
+			decimal += (pow(2, expo)) * num;
 		}
+		expo--;
 	}
 	return decimal;
 }
@@ -375,26 +370,21 @@ void Numbers::Binary_BCD()
 
 int Numbers::Octal_Decimal()
 {
-	vector<string> binary;
-	string temp;
+	string octal;
 	cout << "Enter Octal Number: ";
-	cin >> temp;
-	binary.push_back(temp);
+	cin >> octal;
 	int decimal = 0;
 
-	for (int i = 0; i < binary.size(); i++)
-	{
-		int expo = binary[i].length() - 1;
+	int expo = octal.length() - 1;
 
-		for (int j = 0; j < binary[i].length(); j++)
+	for (int i = 0; i < octal.length(); i++)
+	{
+		int num = octal[i] - '0';
+		if (num >= 0 && num <= 7)
 		{
-			int num = binary[i][j] - '0';
-			if (num >= 1 && num <= 8)
-			{
-				decimal += (pow(8, expo)) * num;
-			}
-			expo--;
+			decimal += (pow(8, expo)) * num;
 		}
+		expo--;
 	}
 	return decimal;
 }
