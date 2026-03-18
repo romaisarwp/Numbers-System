@@ -1,14 +1,13 @@
+#include <string>
 #include "Number_System.h"
 #include <iostream>
-#include <string>
 #include <sstream>
 #include <cmath>
 #include <vector>
 using namespace std;
 
-
 string reverse(string str)
-{ 
+{
 	int s, e;
 	s = 0;
 	e = (str.length()) - 1;
@@ -34,7 +33,7 @@ const void Numbers::Menu()
 	cout << "6. Exit" << endl;
 
 	int inp;
-	cout << "Choose a Number System: ";// which no is user is going to enter 
+	cout << "Choose a Number System: "; // which no is user is going to enter
 	cin >> inp;
 	setInput(inp);
 }
@@ -53,17 +52,21 @@ const void Numbers::Menu2()
 	setInput2(inp);
 }
 
-void Numbers::setInput(int input) {
+void Numbers::setInput(int input)
+{
 	this->input = input;
 }
-int Numbers::getInput() const {
+int Numbers::getInput() const
+{
 	return input;
 }
 
-void Numbers::setInput2(int input2) {
+void Numbers::setInput2(int input2)
+{
 	this->input2 = input2;
 }
-int Numbers::getInput2() const {
+int Numbers::getInput2() const
+{
 	return input2;
 }
 
@@ -82,7 +85,7 @@ void Numbers::Navigations()
 		Navigations2();
 		break;
 	case 6:
-		cout << "exit"<<endl;
+		cout << "exit" << endl;
 		break;
 	default:
 		cout << "Invalid Input!" << endl;
@@ -104,11 +107,19 @@ void Numbers::Navigations2()
 		}
 		else if (input2 == 2)
 		{
-			Decimal_Octal();
+			int decimal;
+			cout << "Enter Decimal Number: ";
+			cin >> decimal;
+			int octal = Decimal_Octal(decimal);
+			cout << "Octal = " << octal << endl;
 		}
 		else if (input2 == 3)
 		{
-			Decimal_HexaDecimal();
+			int decimal;
+			cout << "Enter Decimal Number: ";
+			cin >> decimal;
+			string hexa = Decimal_HexaDecimal(decimal);
+			cout << "HexaDecimal = " << hexa << endl;
 		}
 		else if (input2 == 4)
 		{
@@ -116,33 +127,58 @@ void Numbers::Navigations2()
 		}
 		else if (input2 == 5)
 		{
-			Decimal_BCD();
+			string temp;
+			cout << "Enter Decimal Number: ";
+			cin >> temp;
+			Decimal_BCD(temp);
 		}
 		break;
 	case 2:
+		if (input2 == 1)
+		{
+			int decimal = Octal_Decimal();
+			cout << "Decimal = " << decimal << endl;
+		}
+		else if (input2 == 2)
+		{
+			Binary_Octal();
+		}
+		else if (input2 == 3)
+		{
+			Binary_HexaDecimal();
+		}
+		else if (input2 == 4)
+		{
+			Binary_Binary();
+		}
+		else if (input2 == 5)
+		{
+			Binary_BCD();
+		}
 		break;
 	case 3:
 		break;
 	case 4:
 		if (input2 == 1)
 		{
-			Binary_Decimal();
+			int decimal = Binary_Decimal();
+			cout << "Decimal = " << decimal << endl;
 		}
 		else if (input2 == 2)
 		{
-			Decimal_Octal();
+			Binary_Octal();
 		}
 		else if (input2 == 3)
 		{
-			Decimal_HexaDecimal();
+			Binary_HexaDecimal();
 		}
 		else if (input2 == 4)
 		{
-			Decimal_Binary();
+			Binary_Binary();
 		}
 		else if (input2 == 5)
 		{
-			Decimal_BCD();
+			Binary_BCD();
 		}
 		break;
 	case 5:
@@ -161,7 +197,7 @@ void Numbers::Decimal_Decimal()
 	int decimal;
 	cout << "Enter Decimal Number: ";
 	cin >> decimal;
-	cout << "Binary = " << decimal << endl; // ???? why binary
+	cout << "Decimal = " << decimal << endl;
 }
 
 void Numbers::Decimal_Binary()
@@ -184,15 +220,13 @@ void Numbers::Decimal_Binary()
 		}
 	}
 	binary = reverse(binary);
-	cout << "Binary =" << binary << endl;
+	cout << "Binary = " << binary << endl;
 }
 
-void Numbers::Decimal_Octal()
+int Numbers::Decimal_Octal(int decimal)
 {
-	int decimal;
+
 	string octal = " ";
-	cout << "Enter Decimal Number: ";
-	cin >> decimal;
 	while (decimal >= 1)
 	{
 		int rem;
@@ -201,15 +235,14 @@ void Numbers::Decimal_Octal()
 		string r = to_string(rem);
 		octal += r;
 	}
-	cout << "Octal =" << octal << endl;
+	int octalNum = stoi(octal);
+	return octalNum;
 }
 
-void Numbers::Decimal_HexaDecimal()
+string Numbers::Decimal_HexaDecimal(int decimal)
 {
-	int decimal;
 	string hexa = " ";
-	cout << "Enter Decimal Number: ";
-	cin >> decimal;
+
 	while (decimal >= 1)
 	{
 		int rem;
@@ -246,17 +279,15 @@ void Numbers::Decimal_HexaDecimal()
 			hexa += r;
 		}
 	}
-	cout << "HexaDecimal =" << hexa << endl;
+	return hexa;
 }
 
-void Numbers::Decimal_BCD()
+string Numbers::Decimal_BCD(string temp)
 {
 	vector<string> decimal;
-	string bcd = " ";
-	string temp;
-	cout << "Enter Decimal Number: ";
-	cin >> temp;
 	decimal.push_back(temp);
+
+	string bcd = " ";
 	for (int i = 0; i < decimal.size(); i++)
 	{
 		for (int j = 0; j < decimal[i].length(); j++)
@@ -283,43 +314,77 @@ void Numbers::Decimal_BCD()
 				bcd += "1001 ";
 		}
 	}
-
-	cout << "BCD =" << bcd << endl;
+	return bcd;
 }
 
-int stringToInt(string s)
+void Numbers::Binary_Binary()
 {
-	int num = 0;
-
-	for (int i = 0; i < s.length(); i++)
-	{
-		num = num * 10 + (s[i] - '0');
-	}
-
-	return num;
-}
-
-void Numbers::Binary_Decimal()
-{
-	vector<string> binary;
-	int decimal = 0;
-	string temp;
+	string binary;
 	cout << "Enter Binary Number: ";
-	cin >> temp;
-	binary.push_back(temp);
-	for (int i = 0; i < binary.size(); i++)
-	{
-		int expo = binary[i].length() - 1;
+	cin >> binary;
+	cout << "Binary = " << binary << endl;
+}
 
-		for (int j = 0; j < binary[i].length(); j++)
+int Numbers::Binary_Decimal()
+{
+	string binary;
+	cout << "Enter Binary Number: ";
+	cin >> binary;
+	int decimal = 0;
+
+	int expo = binary.length() - 1;
+
+	for (int i = 0; i < binary.length(); i++)
+	{
+		int num = binary[i] - '0';
+		if (num == 1)
 		{
-			int num = binary[i][j] - '0';
-			if (num == 1)
-			{
-				decimal += (pow(2, expo)) * num;
-			}
-			expo--;
+			decimal += (pow(2, expo)) * num;
 		}
+		expo--;
 	}
-	cout << "Decimal = " << decimal << endl;
+	return decimal;
+}
+
+void Numbers::Binary_Octal()
+{
+	int decimal = Binary_Decimal();
+	int octal = Decimal_Octal(decimal);
+	cout << "Octal = " << octal << endl;
+}
+
+void Numbers::Binary_HexaDecimal()
+{
+	int decimal = Binary_Decimal();
+	string hexa = Decimal_HexaDecimal(decimal);
+	cout << "HexaDecimal = " << hexa << endl;
+}
+
+void Numbers::Binary_BCD()
+{
+	int decimal = Binary_Decimal();
+	string s = to_string(decimal);
+	string bcd = Decimal_BCD(s);
+	cout << "BCD = " << bcd << endl;
+}
+
+int Numbers::Octal_Decimal()
+{
+	string octal;
+	cout << "Enter Octal Number: ";
+	cin >> octal;
+	int decimal = 0;
+
+	int expo = octal.length() - 1;
+
+	for (int i = 0; i < octal.length(); i++)
+	{
+		int num = octal[i] - '0';
+		if (num >= 0 && num <= 7)
+		{
+			decimal += (pow(8, expo)) * num;
+		}
+		expo--;
+	}
+	return decimal;
 }

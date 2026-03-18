@@ -1,8 +1,9 @@
 #pragma once
 #ifndef NUMBER_SYSTEM_H
 #define NUMBER_SYSTEM_H
+#include <string>
 
-string reverse(string str);
+std::string reverse(std::string str);
 class Numbers
 {
 private:
@@ -21,11 +22,17 @@ public:
 
 	void Decimal_Decimal();
 	void Decimal_Binary();
-	void Decimal_Octal();
-	void Decimal_HexaDecimal();
-	void Decimal_BCD();
+	int Decimal_Octal(int decimal);
+	std::string Decimal_HexaDecimal(int decimal);
+	std::string Decimal_BCD(std::string decimal);
 
-	void Binary_Decimal();
+	int Binary_Decimal();
+	void Binary_Binary();
+	void Binary_Octal();
+	void Binary_HexaDecimal();
+	void Binary_BCD();
+
+	int Octal_Decimal();
 };
 
 #endif
