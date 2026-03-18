@@ -1,7 +1,7 @@
 #pragma once
 #ifndef NUMBER_SYSTEM_H
 #define NUMBER_SYSTEM_H
-
+#include<string>
 string reverse(string str);
 class Numbers
 {
